@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amelisa Putri — Front-End Developer, UI/UX Designer & Writer</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display untuk aksen tipografi editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Konfigurasi Kustom Warna Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        cream: '#FFFDF9',
+                        pastelPink: {
+                            50: '#FFF5F7',
+                            100: '#FFE4EC',
+                            200: '#FFCCD9',
+                            300: '#FFA3BC',
+                            400: '#F4729B',
+                            500: '#E14D7D',
+                        },
+                        softYellow: {
+                            50: '#FEFCE8',
+                            100: '#FEF9C3',
+                            200: '#FEF08A',
+                            300: '#FDE047',
+                            400: '#EAB308',
+                        },
+                        charcoal: '#2D2A2E',
+                        muted: '#6E6A70',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-pastelPink-200 selection:text-charcoal overflow-x-hidden">
+
+    <!-- Dekorasi Latar Belakang Halus (Ambient Blobs) -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-pastelPink-100/70 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-24 w-80 h-80 bg-softYellow-100/80 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-pastelPink-50/90 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigasi Utama (Sticky & Glassmorphism) -->
+    <header class="sticky top-0 z-50 bg-cream/80 backdrop-blur-md border-b border-pastelPink-100/80">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Logo / Nama -->
+            <a href="#home" class="flex items-center gap-2.5 group">
+                <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-pastelPink-300 to-softYellow-200 flex items-center justify-center font-serif font-semibold text-charcoal shadow-sm group-hover:scale-105 transition-transform">
+                    AP
+                </span>
+                <span class="font-semibold text-lg tracking-tight text-charcoal">Amelisa putri<span class="text-pastelPink-400">.</span></span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
+                <a href="#about" class="hover:text-pastelPink-500 transition-colors">Tentang</a>
+                <a href="#experience" class="hover:text-pastelPink-500 transition-colors">Pengalaman</a>
+                <a href="#skills" class="hover:text-pastelPink-500 transition-colors">Keahlian</a>
+                <a href="#projects" class="hover:text-pastelPink-500 transition-colors">Karya</a>
+            </nav>
+
+            <!-- CTA Button & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-charcoal text-cream text-sm font-medium hover:bg-pastelPink-500 transition-colors shadow-sm">
+                    <span>Hubungi Saya</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+                
+                <!-- Hamburger Button untuk Mobile -->
+                <button id="mobile-menu-btn" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-xl bg-pastelPink-50 text-charcoal hover:bg-pastelPink-100 transition-colors">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream border-b border-pastelPink-100 px-6 py-5 space-y-4">
+            <a href="#about" class="block text-base font-medium text-charcoal hover:text-pastelPink-500">Tentang Saya</a>
+            <a href="#experience" class="block text-base font-medium text-charcoal hover:text-pastelPink-500">Pengalaman &amp; Pendidikan</a>
+            <a href="#skills" class="block text-base font-medium text-charcoal hover:text-pastelPink-500">Kemampuan</a>
+            <a href="#projects" class="block text-base font-medium text-charcoal hover:text-pastelPink-500">Sorotan Karya</a>
+            <a href="#contact" class="inline-flex items-center justify-center w-full gap-2 px-5 py-3 rounded-2xl bg-pastelPink-400 text-white font-medium">
+                Mari Berkolaborasi
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="max-w-6xl mx-auto px-6 pt-14 pb-20 md:pt-24 md:pb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Kolom Teks Hero -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <!-- Badge Tagline Utama -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-softYellow-100 border border-softYellow-200 text-charcoal text-xs sm:text-sm font-medium shadow-xs">
+                        <span class="w-2 h-2 rounded-full bg-pastelPink-400 animate-pulse"></span>
+                        <span>My Portofolio</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15] text-charcoal">
+                        Halo, saya <span class="font-serif italic font-semibold text-pastelPink-500">Amelisa Putri</span>.
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-muted leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Lulusan Teknik Informatika dengan perpaduan keahlian di bidang <span class="text-charcoal font-medium bg-pastelPink-100/70 px-1.5 py-0.5 rounded-md">Front-End Development</span>, <span class="text-charcoal font-medium bg-softYellow-100 px-1.5 py-0.5 rounded-md">UI/UX Design</span>, serta penceritaan kreatif sebagai <span class="text-charcoal font-medium">Novelis Online</span> dengan lebih dari 1 juta pembaca.
+                    </p>
+
+                    <!-- Tombol Aksi -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#projects" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-pastelPink-400 hover:bg-pastelPink-500 text-white font-medium transition-all shadow-md shadow-pastelPink-200/60 flex items-center justify-center gap-2">
+                            <span>Lihat Portofolio</span>
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#about" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white hover:bg-softYellow-50 text-charcoal border border-pastelPink-200 font-medium transition-all flex items-center justify-center gap-2">
+                            <span>Kenali Lebih Dekat</span>
+                        </a>
+                    </div>
+
+                    <!-- Highlight Metrik Singkat 
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-pastelPink-100 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-bold text-charcoal">1 Jt+</p>
+                            <p class="text-xs sm:text-sm text-muted">Pembaca Novel</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-bold text-charcoal">200+</p>
+                            <p class="text-xs sm:text-sm text-muted">Chapter Terbit</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-bold text-charcoal">3.18</p>
+                            <p class="text-xs sm:text-sm text-muted">IPK Informatika</p>
+                        </div>
+                    </div>-->
+                </div>
+
+                <!-- Kolom Visual / Kartu Profil Minimalis -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-sm">
+                        <!-- Latar Belakang Dekoratif Kartu -->
+                        <div class="absolute -inset-3 bg-gradient-to-tr from-pastelPink-200 via-softYellow-200 to-pastelPink-100 rounded-[2.5rem] rotate-3 opacity-80"></div>
+                        
+                        <!-- Kartu Utama -->
+                        <div class="relative bg-white p-6 sm:p-8 rounded-[2.25rem] border border-pastelPink-100 shadow-xl shadow-pastelPink-100/50 space-y-6">
+                            <!-- Avatar / Foto Profil Lokal (Foto Amelisa Putri.jpg dengan fallback otomatis ke .jpeg/.png dan placeholder) -->
+                            <div class="relative mx-auto w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-pastelPink-300 to-softYellow-200">
+                                <img 
+                                    id="profile-img"
+                                    src="Foto Amelisa Putri.jpg" 
+                                    alt="Foto Profil Amelisa Putri" 
+                                    data-fallbacks="Foto Amelisa Putri.jpeg,Foto Amelisa Putri.png"
+                                    data-placeholder="https://placehold.co/400x400/FFE4EC/2D2A2E?text=Amelisa+Putri"
+                                    onerror="handleImageFallback(this)"
+                                    class="w-full h-full object-cover object-top rounded-full bg-pastelPink-50"
+                                >
+                                <!-- Badge Dekoratif Minimalis -->
+                                <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-softYellow-200 border-2 border-white flex items-center justify-center shadow-sm" title="Amelisa Putri">
+                                    <i data-lucide="sparkles" class="w-4 h-4 text-charcoal"></i>
+                                </div>
+                            </div>
+
+                            <div class="text-center space-y-1.5">
+                                <h2 class="text-xl font-bold text-charcoal">Amelisa Putri</h2>
+                                <p class="text-sm text-muted">S.Tr.Kom — Politeknik Caltex Riau</p>
+                            </div>
+
+                            <!-- Peran Utama Pills -->
+                            <div class="flex flex-wrap justify-center gap-2">
+                                <span class="px-3 py-1 rounded-full bg-pastelPink-50 text-pastelPink-500 text-xs font-medium border border-pastelPink-100">Front-End Dev</span>
+                                <span class="px-3 py-1 rounded-full bg-softYellow-100 text-charcoal text-xs font-medium border border-softYellow-200">UI/UX Designer</span>
+                                <span class="px-3 py-1 rounded-full bg-pastelPink-50 text-pastelPink-500 text-xs font-medium border border-pastelPink-100">Novelis Fizzo</span>
+                            </div>
+
+                            <!-- Info Lokasi & Status -->
+                            <div class="pt-4 border-t border-pastelPink-100/70 flex items-center justify-between text-xs text-muted">
+                                <span class="flex items-center gap-1.5">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-pastelPink-400"></i>
+                                    Riau, Indonesia
+                                </span>
+                                <span class="flex items-center gap-1.5 text-emerald-600 font-medium">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Siap Bekerja
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TENTANG SAYA & PENDIDIKAN -->
+        <section id="about" class="py-20 bg-white/70 border-y border-pastelPink-100/70">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Narasi Tentang Saya -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pastelPink-100/80 text-pastelPink-500 text-xs font-semibold uppercase tracking-wider">
+                            Tentang Saya
+                        </div>
+                       <!-- <h2 class="text-3xl sm:text-4xl font-bold text-charcoal tracking-tight">
+                            Menggabungkan logika kode, estetika desain, dan empati bercerita.
+                        </h2>-->
+                        <p class="text-muted leading-relaxed text-base sm:text-lg">
+                            Saya adalah lulusan <strong class="text-charcoal font-semibold">Teknik Informatika dari Politeknik Caltex Riau</strong> dengan pengalaman sebagai <strong class="text-charcoal font-semibold">Novelis Online</strong> selama 2 tahun dan magang selama 4 bulan sebagai <strong class="text-charcoal font-semibold">Front-End Developer</strong> di sebuah perusahaan yang berfokus pada pengembangan website dan antarmuka pengguna.
+                        </p>
+                        <p class="text-muted leading-relaxed text-base sm:text-lg">
+                            Perjalanan saya dibentuk oleh rasa ingin tahu, kepedulian terhadap pengalaman pengguna dan pembaca, serta komitmen memberikan hasil kerja yang berdampak nyata. Saya memiliki kemampuan kerja tim,mampu menyelesaikan masalah, manajemen waktu, serta ketelitian tinggi baik dalam teknis maupun administrasi.
+                        </p>
+
+                        <!-- Nilai Inti (Knowledge, Care, Impact) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                            <div class="p-4 rounded-2xl bg-softYellow-50 border border-softYellow-200/80 space-y-1.5">
+                                <div class="w-8 h-8 rounded-xl bg-softYellow-200 flex items-center justify-center text-charcoal mb-2">
+                                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="font-semibold text-charcoal text-sm">Problem Solver</h3>
+                                <p class="text-xs text-muted leading-relaxed">Terbiasa menganalisis masalah dan mencari solusi yang efisien.</p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-pastelPink-50 border border-pastelPink-100 space-y-1.5">
+                                <div class="w-8 h-8 rounded-xl bg-pastelPink-200 flex items-center justify-center text-charcoal mb-2">
+                                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="font-semibold text-charcoal text-sm">Collaboration</h3>
+                                <p class="text-xs text-muted leading-relaxed">Komunikasi efektif dan kerja tim yang baik dalam lingkungan profesional.</p>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-softYellow-50 border border-softYellow-200/80 space-y-1.5">
+                                <div class="w-8 h-8 rounded-xl bg-softYellow-200 flex items-center justify-center text-charcoal mb-2">
+                                    <i data-lucide="zap" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="font-semibold text-charcoal text-sm">Adaptability</h3>
+                                <p class="text-xs text-muted leading-relaxed">Cepat beradaptasi dengan teknologi baru dan manajemen waktu yang baik..</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kartu Pendidikan -->
+                    <div class="lg:col-span-5">
+                        <div class="p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-pastelPink-50 via-white to-softYellow-50 border border-pastelPink-200/70 shadow-sm space-y-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-2xl bg-pastelPink-200/70 flex items-center justify-center text-charcoal">
+                                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-semibold uppercase tracking-wider text-pastelPink-500">Pendidikan</span>
+                                    <h3 class="text-lg font-bold text-charcoal">Riwayat Akademik</h3>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6 pt-2">
+                                <!-- Perguruan Tinggi -->
+                                <div class="space-y-1.5 border-l-2 border-pastelPink-400 pl-4">
+                                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-softYellow-200/80 text-charcoal text-xs font-semibold">
+                                        2021 — 2025
+                                    </div>
+                                    <h4 class="text-base font-bold text-charcoal">Politeknik Caltex Riau</h4>
+                                    <p class="text-xs font-medium text-pastelPink-500">Sarjana Terapan Teknik Informatika • IPK 3.18</p>
+                                </div>
+
+                                <!-- SMA -->
+                                <div class="space-y-1.5 border-l-2 border-pastelPink-300 pl-4">
+                                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-pastelPink-100 text-charcoal text-xs font-semibold">
+                                        2019 — 2021
+                                    </div>
+                                    <h4 class="text-base font-bold text-charcoal">SMAN 09 Mandau</h4>
+                                    <p class="text-xs font-medium text-muted">Sekolah Menengah Atas</p>
+                                </div>
+
+                                <!-- SMP -->
+                                <div class="space-y-1.5 border-l-2 border-softYellow-300 pl-4">
+                                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-softYellow-100 text-charcoal text-xs font-semibold">
+                                        2016 — 2019
+                                    </div>
+                                    <h4 class="text-base font-bold text-charcoal">SMPN 03 Mandau</h4>
+                                    <p class="text-xs font-medium text-muted">Sekolah Menengah Pertama</p>
+                                </div>
+
+                                <!-- SD -->
+                                <div class="space-y-1.5 border-l-2 border-pastelPink-200 pl-4">
+                                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-pastelPink-50 text-charcoal text-xs font-semibold">
+                                        2009 — 2016
+                                    </div>
+                                    <h4 class="text-base font-bold text-charcoal">SDN 015 Air Jamban Mandau</h4>
+                                    <p class="text-xs font-medium text-muted">Sekolah Dasar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PENGALAMAN KERJA (TIMELINE MINIMALIS) -->
+        <section id="experience" class="py-20 max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                <span class="inline-block px-3.5 py-1.5 rounded-full bg-softYellow-100 border border-softYellow-200 text-charcoal text-xs font-semibold uppercase tracking-wider">
+                    Jejak Langkah
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal tracking-tight">Pengalaman Kerja &amp; Kreatif</h2>
+                <p class="text-muted text-sm sm:text-base">Kombinasi pengalaman teknis pengembangan web, administrasi, dan manajemen konten digital.</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Pengalaman 1: Magang Front-End -->
+                <div class="group relative bg-white p-7 sm:p-8 rounded-3xl border border-pastelPink-100 hover:border-pastelPink-300 transition-all shadow-xs hover:shadow-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-pastelPink-500 bg-pastelPink-50 px-3 py-1 rounded-full mb-2">
+                                <i data-lucide="laptop" class="w-3.5 h-3.5"></i> Magang Industri
+                            </span>
+                            <h3 class="text-xl font-bold text-charcoal">Front-End Developer &amp; Admin Support</h3>
+                            <p class="text-sm font-medium text-muted">PT. Mobilkom Telekomindo</p>
+                        </div>
+                        <span class="self-start sm:self-center px-4 py-1.5 rounded-full bg-softYellow-100 text-charcoal text-xs font-semibold border border-softYellow-200">
+                            Feb 2024 — Juni 2024
+                        </span>
+                    </div>
+                    <ul class="space-y-2.5 text-sm sm:text-base text-muted list-none">
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-pastelPink-400 mt-2.5 shrink-0"></span>
+                            <span>Bertanggung jawab sebagai Front-End Developer dalam pengembangan antarmuka website perusahaan agar responsif dan mudah digunakan.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-pastelPink-400 mt-2.5 shrink-0"></span>
+                            <span>Membantu staf administrasi dalam pengelolaan dokumen perusahaan, pencatatan data barang masuk dan keluar, serta kebutuhan administratif lainnya dengan ketelitian tinggi.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pengalaman 2: Novelis Online -->
+                <div class="group relative bg-white p-7 sm:p-8 rounded-3xl border border-softYellow-200 hover:border-softYellow-400 transition-all shadow-xs hover:shadow-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal bg-softYellow-100 px-3 py-1 rounded-full mb-2">
+                                <i data-lucide="feather" class="w-3.5 h-3.5"></i> Freelance Creative
+                            </span>
+                            <h3 class="text-xl font-bold text-charcoal">Novelis Online Freelance</h3>
+                            <p class="text-sm font-medium text-muted">Platform Digital Fizzo</p>
+                        </div>
+                        <span class="self-start sm:self-center px-4 py-1.5 rounded-full bg-pastelPink-50 text-pastelPink-500 text-xs font-semibold border border-pastelPink-200">
+                            2021 — 2023
+                        </span>
+                    </div>
+                    <ul class="space-y-2.5 text-sm sm:text-base text-muted list-none">
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-softYellow-400 mt-2.5 shrink-0"></span>
+                            <span>Menulis dan menerbitkan novel online dengan total <strong class="text-charcoal font-medium">160+ chapter</strong> yang berhasil meraih lebih dari <strong class="text-charcoal font-medium">74 Ribu+ pembaca</strong>.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-softYellow-400 mt-2.5 shrink-0"></span>
+                            <span>Mengelola jadwal penulisan harian secara disiplin untuk pembaruan rutin sesuai tenggat waktu platform.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-softYellow-400 mt-2.5 shrink-0"></span>
+                            <span>Berkomunikasi aktif dengan editor dan pembaca, serta menganalisis data retensi pembaca untuk meningkatkan <em>engagement</em>.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEMAMPUAN / SKILLS -->
+        <section id="skills" class="py-20 bg-gradient-to-b from-pastelPink-50/60 to-softYellow-50/60 border-y border-pastelPink-100">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                    <span class="inline-block px-3.5 py-1.5 rounded-full bg-white border border-pastelPink-200 text-pastelPink-500 text-xs font-semibold uppercase tracking-wider">
+                        Kompetensi
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-charcoal tracking-tight">Keahlian &amp; Soft Skills</h2>
+                    <p class="text-muted text-sm sm:text-base">Keseimbangan antara kemampuan teknis digital, analisis, dan kolaborasi profesional.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Kategori 1: Design & Development -->
+                    <div class="bg-white p-7 rounded-3xl border border-pastelPink-100 shadow-xs space-y-5">
+                        <div class="w-12 h-12 rounded-2xl bg-pastelPink-100 flex items-center justify-center text-pastelPink-500">
+                            <i data-lucide="layout" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-charcoal">Web &amp; UI/UX Design</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Front-End Development</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Web Design</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">UI/UX Design</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">HTML &amp; PHP</span>
+                        </div>
+                    </div>
+
+                    <!-- Kategori 2: Data, Admin & Tools (Dilengkapi Cover Novel Lokal) -->
+                    <div class="bg-white p-7 rounded-3xl border border-softYellow-200 shadow-xs space-y-5 flex flex-col justify-between">
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between">
+                                <div class="w-12 h-12 rounded-2xl bg-softYellow-100 flex items-center justify-center text-charcoal">
+                                    <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                                </div>
+                                <!-- Thumbnail Cover Novel Lokal 
+                                <div class="w-12 h-12 rounded-xl overflow-hidden border border-softYellow-300 shadow-xs" title="Cover Karya Novel Amelisa Putri">
+                                    <img 
+                                        src="Foto Novel.jpg" 
+                                        alt="Cover Novel Amelisa Putri" 
+                                        data-fallbacks="Novel.jpeg,Foto Novel.jpeg,Foto Novel.png"
+                                        data-placeholder="https://placehold.co/200x200/FEF9C3/2D2A2E?text=Novel"
+                                        onerror="handleImageFallback(this)"
+                                        class="w-full h-full object-cover"
+                                    >
+                                </div>-->
+                            </div>
+                            <h3 class="text-lg font-bold text-charcoal">Data, Admin, Animasi &amp; Penulisan</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Data Analyst</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Microsoft Office</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Administrasi &amp; Kearsipan</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Project Management Tools</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Creative Writing</span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-softYellow-50 text-charcoal text-xs sm:text-sm font-medium">Blender 2D &amp; 3D </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kategori 3: Interpersonal & Soft Skills -->
+                    <div class="bg-white p-7 rounded-3xl border border-pastelPink-100 shadow-xs space-y-5">
+                        <div class="w-12 h-12 rounded-2xl bg-pastelPink-100 flex items-center justify-center text-pastelPink-500">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-charcoal">Interpersonal</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Teliti</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Problem Solving</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Bertanggung Jawab</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Team Work</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Komunikasi Efektif</span>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-pastelPink-50 text-charcoal text-xs sm:text-sm font-medium">Manajemen Waktu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOROTAN KARYA / PROYEK PILIHAN -->
+        <section id="projects" class="py-20 max-w-6xl mx-auto px-6">
+            <!-- Header Vertikal: Judul & deskripsi rata tengah -->
+            <div class="mb-12 space-y-3 max-w-2xl mx-auto text-center">
+                <span class="inline-block px-3.5 py-1.5 rounded-full bg-softYellow-100 border border-softYellow-200 text-charcoal text-xs font-semibold uppercase tracking-wider">
+                    Sorotan Karya
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal tracking-tight">Proyek &amp; Pencapaian</h2>
+                <p class="text-muted text-sm sm:text-base leading-relaxed">
+                    Beberapa representasi karya dari latar belakang pengembangan web, desain antarmuka, dan penulisan kreatif.
+                </p>
+            </div>
+
+            <!-- GRID KARTU PROYEK UTAMA (3 Kolom Standar & Proporsional) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+                
+                <!-- PROYEK UTAMA 1: Karya Animasi 2D / 3D (Cover Youtube.jpeg) -->
+                <article class="group bg-white rounded-3xl border border-pastelPink-100 hover:border-pastelPink-300 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col">
+                    <!-- Area Cover Klik untuk Lightbox -->
+                    <div 
+                        onclick="openLightbox(this.querySelector('img'), 'Karya Animasi 2D / 3D')" 
+                        role="button"
+                        tabindex="0"
+                        aria-label="Perbesar Cover Video Animasi Amelisa Putri"
+                        onkeydown="if(event.key==='Enter'||event.key===' ') openLightbox(this.querySelector('img'), 'Karya Animasi 2D / 3D')"
+                        class="relative aspect-video bg-pastelPink-50 overflow-hidden cursor-pointer border-b border-pastelPink-100/70"
+                    >
+                        <img 
+                            src="Cover Youtube.jpeg" 
+                            alt="Cover Video Animasi Amelisa Putri" 
+                            data-placeholder="https://placehold.co/800x450/FFE4EC/2D2A2E?text=Cover+Video+Animasi"
+                            onerror="handleImageFallback(this)"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <!-- Indikator Perbesar Halus saat Hover -->
+                        <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity px-3 py-1.5 rounded-full bg-white/95 text-charcoal text-xs font-medium shadow-sm flex items-center gap-1.5">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-pastelPink-500"></i>
+                                <span>Lihat Cover</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Konten Detail Proyek 1 -->
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
+                        <div class="space-y-2.5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pastelPink-50 text-pastelPink-500 text-xs font-semibold">
+                                <i data-lucide="film" class="w-3.5 h-3.5"></i> Multimedia &amp; Animasi
+                            </span>
+                            <h3 class="text-lg font-bold text-charcoal group-hover:text-pastelPink-500 transition-colors">
+                                Karya Animasi 2D / 3D
+                            </h3>
+                            <p class="text-sm text-muted leading-relaxed">
+                                Proyek produksi film/video animasi yang dikembangkan selama studi Teknik Informatika di Politeknik Caltex Riau, merefleksikan kreativitas visual dan penguasaan multimedia.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-softYellow-50 text-charcoal text-xs font-medium border border-softYellow-200/60">Animasi 2D/3D</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-pastelPink-50 text-charcoal text-xs font-medium border border-pastelPink-100">Video Production</span>
+                            </div>
+
+                            <!-- Tautan Eksternal Khusus Menuju YouTube -->
+                            <div class="pt-3 border-t border-pastelPink-100/70">
+                                <a 
+                                    href="https://youtu.be/3qVavGhamLU?si=6A2-3L3LispNKh6z" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-pastelPink-500 hover:text-pastelPink-400 transition-colors"
+                                >
+                                    <span>Tonton langsung di YouTube</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROYEK UTAMA 2: Website Perusahaan (Website Perusahaan.png) -->
+                <article class="group bg-white rounded-3xl border border-softYellow-200 hover:border-softYellow-400 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col">
+                    <!-- Area Cover Klik untuk Lightbox -->
+                    <div 
+                        onclick="openLightbox(this.querySelector('img'), 'Website Perusahaan — PT. Mobilkom Telekomindo')" 
+                        role="button"
+                        tabindex="0"
+                        aria-label="Perbesar Cover Website Perusahaan"
+                        onkeydown="if(event.key==='Enter'||event.key===' ') openLightbox(this.querySelector('img'), 'Website Perusahaan — PT. Mobilkom Telekomindo')"
+                        class="relative aspect-video bg-softYellow-50 overflow-hidden cursor-pointer border-b border-softYellow-200/70"
+                    >
+                        <img 
+                            src="Website Perusahaan.png" 
+                            alt="Cover Website Perusahaan Amelisa Putri" 
+                            data-placeholder="https://placehold.co/800x450/FEF9C3/2D2A2E?text=Website+Perusahaan"
+                            onerror="handleImageFallback(this)"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <!-- Indikator Perbesar Halus saat Hover -->
+                        <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity px-3 py-1.5 rounded-full bg-white/95 text-charcoal text-xs font-medium shadow-sm flex items-center gap-1.5">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-charcoal"></i>
+                                <span>Lihat Cover</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Konten Detail Proyek 2 -->
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
+                        <div class="space-y-2.5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-softYellow-100 text-charcoal text-xs font-semibold">
+                                <i data-lucide="globe" class="w-3.5 h-3.5"></i> Front-End Development
+                            </span>
+                            <h3 class="text-lg font-bold text-charcoal group-hover:text-pastelPink-500 transition-colors">
+                                Website Perusahaan
+                            </h3>
+                            <p class="text-sm text-muted leading-relaxed">
+                                Perancangan dan implementasi tampilan antarmuka website inventori di PT. Mobilkom Telekomindo yang responsif, dan bersih untuk memudahkan navigasi pengguna.
+                            </p>
+                        </div>
+
+                        <div class="pt-2">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-pastelPink-50 text-charcoal text-xs font-medium border border-pastelPink-100">HTML/CSS</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-softYellow-50 text-charcoal text-xs font-medium border border-softYellow-200/60">Responsive UI</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROYEK UTAMA 3: Serial Novel Digital Populer (Novel.jpeg) -->
+                <article class="group bg-white rounded-3xl border border-pastelPink-100 hover:border-pastelPink-300 overflow-hidden shadow-xs hover:shadow-lg transition-all flex flex-col">
+                    <!-- Area Cover Klik untuk Lightbox -->
+                    <div 
+                        onclick="openLightbox(this.querySelector('img'), 'Serial Novel Digital Populer — Fizzo')" 
+                        role="button"
+                        tabindex="0"
+                        aria-label="Perbesar Cover Serial Novel Digital"
+                        onkeydown="if(event.key==='Enter'||event.key===' ') openLightbox(this.querySelector('img'), 'Serial Novel Digital Populer — Fizzo')"
+                        class="relative aspect-video bg-pastelPink-50 overflow-hidden cursor-pointer border-b border-pastelPink-100/70"
+                    >
+                        <img 
+                            src="Novel.jpeg" 
+                            alt="Cover Novel Amelisa Putri" 
+                            data-placeholder="https://placehold.co/800x450/FFE4EC/2D2A2E?text=Serial+Novel+Digital"
+                            onerror="handleImageFallback(this)"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <!-- Badge Pencapaian 74 Ribu+ Pembaca -->
+                        <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs text-pastelPink-500 text-xs font-bold shadow-xs border border-pastelPink-100">
+                            74 Ribu+ Pembaca
+                        </span>
+                        <!-- Indikator Perbesar Halus saat Hover -->
+                        <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-colors flex items-center justify-center">
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity px-3 py-1.5 rounded-full bg-white/95 text-charcoal text-xs font-medium shadow-sm flex items-center gap-1.5">
+                                <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-pastelPink-500"></i>
+                                <span>Lihat Cover</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Konten Detail Proyek 3 -->
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
+                        <div class="space-y-2.5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pastelPink-50 text-pastelPink-500 text-xs font-semibold">
+                                <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> Storytelling &amp; Analytics
+                            </span>
+                            <h3 class="text-lg font-bold text-charcoal group-hover:text-pastelPink-500 transition-colors">
+                                Serial Novel Digital Populer
+                            </h3>
+                            <p class="text-sm text-muted leading-relaxed">
+                                Sebuah karya fiksi serial di platform Fizzo dengan kurang lebih 160 chapter dan 74 ribu+ pembaca berbasis analisis retensi audiens serta konsistensi publikasi harian.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-softYellow-50 text-charcoal text-xs font-medium border border-softYellow-200/60">Creative Writing</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-pastelPink-50 text-charcoal text-xs font-medium border border-pastelPink-100">Audience Analytics</span>
+                            </div>
+
+                            <!-- Tautan Eksternal Khusus Menuju Fizzo Novel -->
+                            <div class="pt-3 border-t border-pastelPink-100/70">
+                                <a 
+                                    href="https://www.fizzo.org/page/share/?bid=7848776153182502141&isNew=1&from=copy_link&group=2&d=7632056142943598330&u=7787787151373612286&language=id&region=ID" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-pastelPink-500 hover:text-pastelPink-400 transition-colors"
+                                >
+                                    <span>Baca Novel di Fizzo</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER & KONTAK -->
+    <footer id="contact" class="bg-white border-t border-pastelPink-100 pt-16 pb-12">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="rounded-[2.25rem] bg-gradient-to-tr from-pastelPink-100/80 via-softYellow-50 to-pastelPink-50 border border-pastelPink-200/70 p-8 sm:p-12 text-center space-y-6 shadow-xs">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-pastelPink-500 text-xs font-semibold uppercase tracking-wider shadow-2xs">
+                    Mari Terhubung
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-charcoal tracking-tight max-w-xl mx-auto">
+                    Tertarik berkolaborasi atau berdiskusi lebih lanjut?
+                </h2>
+                <p class="text-muted text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+                    Saya terbuka untuk peluang kerja penuh waktu, magang lanjutan, maupun proyek lepas di bidang Front-End Development, UI/UX Design, dan Administrasi Digital.
+                </p>
+
+                <!-- Informasi Kontak: Email & No Telepon Langsung -->
+                <div class="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-charcoal py-2">
+                    <a href="mailto:amelisaputri1116@gmail.com" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-pastelPink-50 border border-pastelPink-200 shadow-2xs transition-colors">
+                        <i data-lucide="mail" class="w-4 h-4 text-pastelPink-500"></i>
+                        <span>amelisaputri1116@gmail.com</span>
+                    </a>
+                    <a href="https://wa.me/62895602840534" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-softYellow-100 border border-pastelPink-200 shadow-2xs transition-colors">
+                        <i data-lucide="phone" class="w-4 h-4 text-emerald-600"></i>
+                        <span>0895602840534</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright & Navigasi Bawah -->
+            <div class="mt-12 pt-8 border-t border-pastelPink-100/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-muted">
+                <p>&copy; 2026 <strong class="font-semibold text-charcoal">Amelisa Putri</strong>. Dirancang dengan ketelitian &amp; estetika pastel.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#home" class="hover:text-pastelPink-500 transition-colors">Kembali ke Atas ↑</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX PREVIEW MODAL (Interaktif & Responsif) -->
+    <div 
+        id="lightbox-modal" 
+        role="dialog" 
+        aria-modal="true" 
+        aria-labelledby="lightbox-title"
+        class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-charcoal/75 backdrop-blur-xs transition-opacity duration-200"
+        onclick="if(event.target === this) closeLightbox()"
+    >
+        <div class="relative w-full max-w-3xl bg-white rounded-3xl border border-pastelPink-100 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <!-- Header Modal -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-pastelPink-100 bg-cream/80">
+                <h3 id="lightbox-title" class="text-sm sm:text-base font-bold text-charcoal truncate pr-4">
+                    Pratinjau Karya
+                </h3>
+                <button 
+                    id="lightbox-close-btn"
+                    type="button" 
+                    onclick="closeLightbox()" 
+                    aria-label="Tutup Pratinjau"
+                    class="w-9 h-9 rounded-full bg-pastelPink-50 hover:bg-pastelPink-200 text-charcoal flex items-center justify-center transition-colors shrink-0"
+                >
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Area Gambar Penuh -->
+            <div class="p-4 sm:p-6 bg-pastelPink-50/40 flex items-center justify-center max-h-[78vh] overflow-auto">
+                <img 
+                    id="lightbox-image" 
+                    src="" 
+                    alt="Pratinjau Cover Proyek" 
+                    class="max-w-full max-h-[68vh] w-auto h-auto rounded-2xl object-contain shadow-md border border-pastelPink-100 bg-white"
+                >
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifikasi Salin Email -->
+    <div id="toast-msg" class="fixed bottom-6 right-6 z-50 hidden items-center gap-2.5 px-5 py-3 rounded-2xl bg-charcoal text-cream text-sm font-medium shadow-lg">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-softYellow-300"></i>
+        <span>Informasi kontak berhasil disalin!</span>
+    </div>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // Inisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // Toggle Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Tutup menu mobile saat salah satu tautan diklik
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Fungsi Fallback Gambar Otomatis untuk Aset Lokal
+        function handleImageFallback(imgEl) {
+            const fallbacksAttr = imgEl.getAttribute('data-fallbacks');
+            const placeholder = imgEl.getAttribute('data-placeholder');
+            let tried = parseInt(imgEl.getAttribute('data-tried') || '0', 10);
+
+            if (fallbacksAttr) {
+                const list = fallbacksAttr.split(',').map(item => item.trim()).filter(Boolean);
+                if (tried < list.length) {
+                    imgEl.setAttribute('data-tried', (tried + 1).toString());
+                    imgEl.src = list[tried];
+                    return;
+                }
+            }
+
+            if (placeholder && imgEl.src !== placeholder) {
+                imgEl.onerror = null;
+                imgEl.src = placeholder;
+            }
+        }
+
+        // Kontrol Lightbox Preview Modal
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTitle = document.getElementById('lightbox-title');
+
+        function openLightbox(imgElement, titleText) {
+            if (!imgElement || !lightboxModal || !lightboxImage) return;
+            lightboxImage.src = imgElement.currentSrc || imgElement.src;
+            lightboxImage.alt = imgElement.alt || titleText;
+            if (lightboxTitle) {
+                lightboxTitle.textContent = titleText || 'Pratinjau Karya';
+            }
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            if (!lightboxModal) return;
+            lightboxModal.classList.add('hidden');
+            lightboxModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Tutup Lightbox dengan tombol Escape (Esc)
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && lightboxModal && !lightboxModal.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+
+        // Fungsi Salin Kontak (Kompatibel dengan iFrame & Browser Modern)
+        function copyContactInfo(textToCopy) {
+            const tempInput = document.createElement('input');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('toast-msg');
+                const label = document.getElementById('copy-label');
+                if (label) label.textContent = 'Kontak Tersalin!';
+                if (toast) {
+                    toast.classList.remove('hidden');
+                    toast.classList.add('flex');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                        toast.classList.remove('flex');
+                        if (label) label.textContent = 'Salin Kontak';
+                    }, 2600);
+                }
+            } catch (err) {
+                console.error('Gagal menyalin kontak:', err);
+            }
+            document.body.removeChild(tempInput);
+        }
+    </script>
+</body>
+</html>
